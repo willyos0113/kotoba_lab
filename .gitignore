@@ -1,0 +1,38 @@
+# ---------- Python / FastAPI ----------
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# ---------- Node / React ----------
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- 環境變數 / 機密 ----------
+.env
+.env.*
+!.env.example
+
+# ---------- 資料庫 / 本機資料 ----------
+*.sqlite3
+*.db
+
+# ---------- IDE / OS ----------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ---------- Claude Code ----------
+.claude/settings.local.json
