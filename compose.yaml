@@ -1,0 +1,17 @@
+services:
+  # === Frontend Application ===
+  # ...
+
+  # === Backend Application ===
+  backend:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    volumes:
+      - ./backend:/app # mount the backend directory to /app in the container (bind mount)
+    ports:
+      - "8000:8000" # map port 8000 on the host to port 8000 in the container
+
+
+  # === Database ===
+  # ...

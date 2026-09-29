@@ -1,17 +1,31 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 
-from app.api.v1.router import api_router
-from app.core.config import settings
+app = FastAPI()
 
-app = FastAPI(title=settings.app_name)
+@app.get("/")
+async def read_root():
+    """
+     這是一個簡單的根路徑 API，回傳 "Hello World" 訊息。
+    """
+    return {"message": "Hello, World!"}
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.cors_origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+@app.get("/{name}")
+async def greet_name(name: str):
+    """
+    這個 API 接收一個名字作為路徑參數，並回傳問候語。
+    """
+    return {"message": f"Hello {name}"}
 
-app.include_router(api_router, prefix="/api/v1")
+class Item(BaseModel):
+    name: str
+    price: float
+    is_offer: bool
+
+@app.post("/items")
+async def create_item(request: Item):
+    """
+    這個 API 接收一個 Item 物件 (包含 name, price, is_offer)，
+    並回傳接收到的 Item 資料。
+    """
+    return request
