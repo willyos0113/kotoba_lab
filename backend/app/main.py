@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from app.agents.greeter import generate_greeting
-from app.schemas.schemas import Item, GreetingRequest
+from app.models.models import Item, GreetingRequest
 
 app = FastAPI()
 
