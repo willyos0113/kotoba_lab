@@ -13,17 +13,18 @@
 
 ## 技術架構
 
-| 層級 | 技術 |
-| --- | --- |
-| 前端 | React + Vite + TypeScript |
-| 後端 | FastAPI (Python) |
-| Agent 框架 | Claude AI Agent SDK |
-| 容器化 | Docker + Docker Compose |
-| 溝通方式 | REST API |
+| 層級       | 技術                      |
+| ---------- | ------------------------- |
+| 前端       | React + Vite + TypeScript |
+| 後端       | FastAPI (Python)          |
+| Agent 框架 | Claude AI Agent SDK       |
+| 容器化     | Docker + Docker Compose   |
+| 溝通方式   | REST API                  |
 
 ## 目前狀態
 
 進行中的開發階段：
+
 - ✅ 前後端基礎框架建立（React 19 + FastAPI）
 - ✅ Docker Compose 後端容器化
 - ✅ 模塊化工具函數設計（tools 目錄）
@@ -106,17 +107,19 @@ npm run dev                      # http://localhost:5173
 
 ### API 端點
 
-| 方法 | 端點 | 說明 |
-| --- | --- | --- |
+| 方法 | 端點       | 說明                                       |
+| ---- | ---------- | ------------------------------------------ |
 | POST | `/weather` | 獲取指定城市的天氣預報（需要 CWA_API_KEY） |
 
 **請求範例：**
+
 ```bash
 curl -X POST "http://localhost:8000/weather?city=台北" \
   -H "Content-Type: application/json"
 ```
 
 **回應範例：**
+
 ```json
 {
   "status": "success",
@@ -130,21 +133,25 @@ API 互動文件：http://localhost:8000/docs（Swagger UI）
 ## 開發慣例
 
 ### 後端代碼組織
+
 - **工具函數**：放在 `app/tools/` 目錄下（如 `greeter.py`, `params_getter.py`）
 - **資料模型**：Pydantic 模型放在 `app/models/models.py` 中
 - **API 路由**：定義在 `app/main.py` 中
 
 ### 環境設定
+
 - 機密與環境變數放在 `.env` 文件中（已被 git 忽略）
 - 同步更新 `.env.example` 以文檔化所需的環境變數
 - **必需環境變數**：
   - `CWA_API_KEY`：中央氣象局 API 金鑰（用於天氣功能）
 
 ### 前端開發
+
 - 所有後端 API 呼叫統一經過 `src/api/client.ts`
 - React 組件放在 `src/components/` 目錄（待建立）
 
 ### API 版本管理
+
 - 破壞性 API 變更時使用版本前綴（`/api/v2` 等）
 - 確保向後相容性或清晰的遷移路徑
 
@@ -165,6 +172,7 @@ DEBUG=false
 ## 故障排除
 
 ### 1. 後端無法啟動
+
 ```bash
 # 確保已安裝依賴
 cd backend
@@ -175,6 +183,7 @@ cat .env
 ```
 
 ### 2. Docker Compose 構建失敗
+
 ```bash
 # 清除快取並重新構建
 docker-compose down -v
@@ -182,6 +191,7 @@ docker-compose up --build
 ```
 
 ### 3. 前端無法連接後端
+
 - 確保後端在 http://localhost:8000 運行
 - 檢查 `frontend/vite.config.ts` 中的代理設定
 
